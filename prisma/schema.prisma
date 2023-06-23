@@ -18,6 +18,16 @@ model User {
     updatedAt DateTime @updatedAt @map("updated_at")
 }
 
+model CheckIn {
+    id          String    @id @default(cuid())
+    validatedAt DateTime? @map("validated_at")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("check_ins")
+}
+
 model Gym {
     id          String  @id @default(cuid())
     name        String
