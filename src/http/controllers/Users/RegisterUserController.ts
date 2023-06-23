@@ -25,7 +25,7 @@ export async function RegisterUserController(
       return reply.status(409).send()
     }
 
-    return reply.status(500).send()
+    throw error
   }
 
   return reply.status(201).send()
