@@ -17,3 +17,17 @@ model User {
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 }
+
+model Gym {
+    id          String  @id @default(cuid())
+    name        String
+    description String?
+    phone       String?
+    latitude    Decimal
+    longitude   Decimal
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("gyms")
+}
