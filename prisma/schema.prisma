@@ -19,12 +19,20 @@ model User {
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 
+    checkIns CheckIn[]
+
     @@map("users")
 }
 
 model CheckIn {
     id          String    @id @default(cuid())
     validatedAt DateTime? @map("validated_at")
+
+    userId String @map("user_id")
+    user   User   @relation(fields: [userId], references: [id])
+
+    gymId String @map("gym_id")
+    gym   Gym    @relation(fields: [gymId], references: [id])
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
@@ -42,6 +50,8 @@ model Gym {
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
+
+    checkIns CheckIn[]
 
     @@map("gyms")
 }
