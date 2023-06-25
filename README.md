@@ -4,8 +4,8 @@ This project was built following the bootcamp [Ignite 2023](https://rocketseat.c
 
 ## Functional Requirements
 - [x] Should be possible to sign up
-- [ ] Should be possible to sign in
-- [ ] Should be possible to fetch the profile of the authenticated user
+- [x] Should be possible to sign in
+- [x] Should be possible to fetch the profile of the authenticated user
 - [ ] Should be possible to fetch the total of check-ins
 - [ ] Should be possible to fetch the check-ins historical
 - [ ] Should be possible to get the near gym
