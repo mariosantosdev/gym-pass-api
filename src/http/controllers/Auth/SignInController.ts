@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { PrismaUsersRepository } from '~src/repositores/prisma/prisma-users-repository'
 import { InvalidCredentialsError } from '~src/errors/InvalidCredentialsError'
-import { SignInService } from '~src/services/Auth/SignInService'
+import { SignInService } from '~src/services/SignInService'
 
 export async function SignInController(
   request: FastifyRequest,

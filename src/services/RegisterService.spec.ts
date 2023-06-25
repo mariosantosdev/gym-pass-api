@@ -1,17 +1,17 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { compare } from 'bcryptjs'
 
-import { RegisterUserService } from './RegisterUserService'
+import { RegisterService } from './RegisterService'
 import { InMemoryUsersRepository } from '~src/repositores/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from '~src/errors/UserAlreadyExistsError'
 
 let inMemoryUsersRepository: InMemoryUsersRepository
-let sut: RegisterUserService
+let sut: RegisterService
 
 describe('Register User Service', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
-    sut = new RegisterUserService(inMemoryUsersRepository)
+    sut = new RegisterService(inMemoryUsersRepository)
   })
 
   it('should hash the user password', async () => {
