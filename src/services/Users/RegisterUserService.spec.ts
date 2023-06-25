@@ -1,16 +1,21 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { compare } from 'bcryptjs'
 
 import { RegisterUserService } from './RegisterUserService'
 import { InMemoryUsersRepository } from '~src/repositores/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from '~src/errors/UserAlreadyExistsError'
 
-describe('Register User Service', () => {
-  it('should hash the user password', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUserService = new RegisterUserService(inMemoryUsersRepository)
+let inMemoryUsersRepository: InMemoryUsersRepository
+let sut: RegisterUserService
 
-    const user = await registerUserService.execute({
+describe('Register User Service', () => {
+  beforeEach(() => {
+    inMemoryUsersRepository = new InMemoryUsersRepository()
+    sut = new RegisterUserService(inMemoryUsersRepository)
+  })
+
+  it('should hash the user password', async () => {
+    const user = await sut.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '12345678',
@@ -22,19 +27,16 @@ describe('Register User Service', () => {
   })
 
   it('should not be able to register a user with an email that already exists', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUserService = new RegisterUserService(inMemoryUsersRepository)
-
     const email = 'johndoe@email.com'
 
-    await registerUserService.execute({
+    await sut.execute({
       name: 'John Doe',
       email,
       password: '12345678',
     })
 
     await expect(() =>
-      registerUserService.execute({
+      sut.execute({
         name: 'John Doe',
         email,
         password: '12345678',
@@ -43,10 +45,7 @@ describe('Register User Service', () => {
   })
 
   it('should be able to register a new user', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUserService = new RegisterUserService(inMemoryUsersRepository)
-
-    const user = await registerUserService.execute({
+    const user = await sut.execute({
       name: 'John Doe',
       email: 'johndoe@email.com',
       password: '12345678',
