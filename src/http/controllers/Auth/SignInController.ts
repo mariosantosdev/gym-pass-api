@@ -1,8 +1,7 @@
 import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { PrismaUsersRepository } from '~src/repositores/prisma/prisma-users-repository'
 import { InvalidCredentialsError } from '~src/errors/InvalidCredentialsError'
-import { SignInService } from '~src/services/SignInService'
+import { makeSignInService } from '~src/services/factories/makeSignInService'
 
 export async function SignInController(
   request: FastifyRequest,
@@ -16,9 +15,8 @@ export async function SignInController(
   const { email, password } = signInBodySchema.parse(request.body)
 
   try {
-    const usersRepository = new PrismaUsersRepository()
-    const signInUseCase = new SignInService(usersRepository)
-    await signInUseCase.execute({ email, password })
+    const signInService = makeSignInService()
+    await signInService.execute({ email, password })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(400).send()
