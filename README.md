@@ -7,12 +7,12 @@ This project was built following the bootcamp [Ignite 2023](https://rocketseat.c
 - [x] Should be possible to sign in
 - [x] Should be possible to fetch the profile of the authenticated user
 - [ ] Should be possible to fetch the total of check-ins
-- [ ] Should be possible to fetch the check-ins historical
+- [x] Should be possible to fetch the check-ins history
 - [ ] Should be possible to get the near gym
 - [ ] Should be possible to fetch the gym by name
-- [ ] Should be possible to do a check-in
+- [x] Should be possible to do a check-in
 - [ ] Should be possible to validate the check-in of the user
-- [ ] Should be possible to create a gym
+- [x] Should be possible to create a gym
 
 ## Business Rules
 - [x] The user can't sign up with e-mail already used
@@ -24,6 +24,6 @@ This project was built following the bootcamp [Ignite 2023](https://rocketseat.c
 
 ## Not Functional Requirements
 - [x] The user password should be encrypted
-- [ ] The data of the application should be storage in PostgreSQL
+- [x] The data of the application should be storage in PostgreSQL
 - [ ] Whole the list should be paginated with 20 items per page
 - [ ] The user should be identified by a JW (JSON Web Token)
