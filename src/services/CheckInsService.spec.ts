@@ -3,23 +3,24 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
 import { CheckInService } from './CheckInService'
 import { InMemoryCheckInsRepository } from '~src/repositores/in-memory/in-memory-check-ins-repository'
 import { InMemoryGymsRepository } from '~src/repositores/in-memory/in-memory-gyms-repository'
-import { Decimal } from '@prisma/client/runtime'
+import { MaxNumberOfCheckInsError } from '~src/errors/MaxNumberOfCheckInsError'
+import { MaxDistanceError } from '~src/errors/MaxDistanceError'
 
 let inMemoryCheckInsRepository: InMemoryCheckInsRepository
 let inMemoryGymsRepository: InMemoryGymsRepository
 let sut: CheckInService
 
 describe('Check In Service', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     inMemoryCheckInsRepository = new InMemoryCheckInsRepository()
     inMemoryGymsRepository = new InMemoryGymsRepository()
     sut = new CheckInService(inMemoryCheckInsRepository, inMemoryGymsRepository)
 
-    inMemoryGymsRepository.items.push({
+    await inMemoryGymsRepository.create({
       id: 'gym-id',
       name: 'Gym Name',
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: 0,
+      longitude: 0,
       phone: '',
       description: '',
       createdAt: new Date(),
@@ -61,7 +62,7 @@ describe('Check In Service', () => {
         userLatitude: 0,
         userLongitude: 0,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('should be able to check in twice in different days', async () => {
@@ -87,11 +88,11 @@ describe('Check In Service', () => {
   })
 
   it('should not be able to check inon distant gym', async () => {
-    inMemoryGymsRepository.items.push({
+    await inMemoryGymsRepository.create({
       id: 'gym-2',
       name: 'Gym Name',
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: 0,
+      longitude: 0,
       phone: '',
       description: '',
       createdAt: new Date(),
@@ -105,6 +106,6 @@ describe('Check In Service', () => {
         userLatitude: -20.7321763,
         userLongitude: -44.7698854,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })
