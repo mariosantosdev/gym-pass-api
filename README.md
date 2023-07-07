@@ -8,7 +8,7 @@ This project was built following the bootcamp [Ignite 2023](https://rocketseat.c
 - [x] Should be possible to fetch the profile of the authenticated user
 - [x] Should be possible to fetch the total of check-ins
 - [x] Should be possible to fetch the check-ins history
-- [ ] Should be possible to get the near gym
+- [x] Should be possible to get the near gym (until 10 kilometers)
 - [x] Should be possible to fetch the gym by name
 - [x] Should be possible to do a check-in
 - [ ] Should be possible to validate the check-in of the user
