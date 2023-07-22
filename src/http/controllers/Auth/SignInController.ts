@@ -16,7 +16,18 @@ export async function SignInController(
 
   try {
     const signInService = makeSignInService()
-    await signInService.execute({ email, password })
+    const { user } = await signInService.execute({ email, password })
+
+    const token = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+        },
+      },
+    )
+
+    return reply.status(200).send({ token })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(400).send()
@@ -24,6 +35,4 @@ export async function SignInController(
 
     throw error
   }
-
-  return reply.status(200).send()
 }
