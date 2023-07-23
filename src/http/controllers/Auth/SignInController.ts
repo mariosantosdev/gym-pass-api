@@ -19,7 +19,9 @@ export async function SignInController(
     const { user } = await signInService.execute({ email, password })
 
     const token = await reply.jwtSign(
-      {},
+      {
+        role: user.role,
+      },
       {
         sign: {
           sub: user.id,
@@ -28,7 +30,9 @@ export async function SignInController(
     )
 
     const refreshToken = await reply.jwtSign(
-      {},
+      {
+        role: user.role,
+      },
       {
         sign: {
           sub: user.id,
