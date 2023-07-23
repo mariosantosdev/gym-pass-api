@@ -11,7 +11,7 @@ export async function SearchGymController(
     page: z.coerce.number().min(1, 'A página deve ser no mínimo 1').default(1),
   })
 
-  const { q, page } = searchGymsQuerySchema.parse(request.body)
+  const { q, page } = searchGymsQuerySchema.parse(request.query)
 
   const searchGymsService = makeSearchGymsService()
   const gyms = await searchGymsService.execute({
