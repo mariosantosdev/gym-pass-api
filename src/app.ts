@@ -6,12 +6,14 @@ import { env } from './env'
 import { userRoutes } from './http/controllers/Users/routes'
 import { authRoutes } from './http/controllers/Auth/routes'
 import { gymsRoutes } from './http/controllers/Gyms/routes'
+import { checkInsRoutes } from './http/controllers/CheckIns/routes'
 
 export const app = fastify()
 
 app.register(authRoutes)
 app.register(userRoutes)
 app.register(gymsRoutes)
+app.register(checkInsRoutes)
 
 app.register(fastifyJwt, { secret: env.JWT_SECRET })
 
