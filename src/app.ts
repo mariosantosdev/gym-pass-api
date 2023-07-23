@@ -5,11 +5,13 @@ import { ZodError } from 'zod'
 import { env } from './env'
 import { userRoutes } from './http/controllers/Users/routes'
 import { authRoutes } from './http/controllers/Auth/routes'
+import { gymsRoutes } from './http/controllers/Gyms/routes'
 
 export const app = fastify()
 
 app.register(authRoutes)
 app.register(userRoutes)
+app.register(gymsRoutes)
 
 app.register(fastifyJwt, { secret: env.JWT_SECRET })
 
