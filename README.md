@@ -1,7 +1,5 @@
 # Gym Pass API
 
-This project was built following the bootcamp [Ignite 2023](https://rocketseat.com.br/ignite) in the chapter of NodeJS.
-
 ## Functional Requirements
 - [x] Should be possible to sign up
 - [x] Should be possible to sign in
